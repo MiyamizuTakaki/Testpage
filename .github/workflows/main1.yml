@@ -1,0 +1,24 @@
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches:
+      - master # 将此更改为您的默认分支名称
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 7.0.x # 将此更改为您正在使用的 .NET 版本
+      - name: Build
+        run: dotnet build --configuration Release
+      - name: Publish
+        run: dotnet publish -c Release -o ./publish
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.ACCESS_TOKEN }} # 将此更改为您的访问令牌名称
+          publish_dir: ./publish/wwwroot
