@@ -12,7 +12,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.0.x # 将此更改为您正在使用的 .NET 版本
+          dotnet-version: 7.0.x # 将此更改为您正在使用的 .NET 版本
       - name: Build
         run: dotnet build --configuration Release
       - name: Publish
